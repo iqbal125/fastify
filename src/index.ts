@@ -2,7 +2,7 @@ import fastify from 'fastify';
 
 import AutoLoad from '@fastify/autoload';
 import fastifyEnv from '@fastify/env';
-import { options } from './types/config';
+import { options } from './types/envConfig';
 import path from 'path';
 
 export const server = fastify();

@@ -3,6 +3,15 @@ import { FastifyEnvOptions } from '@fastify/env';
 import dotenv from 'dotenv';
 dotenv.config();
 
+declare module 'fastify' {
+  interface FastifyInstance {
+    config: {
+      ORIGIN: string;
+      PORT: number;
+    };
+  }
+}
+
 interface Env {
   PORT: number;
 }
