@@ -1,0 +1,21 @@
+meta {
+  name: route1-post
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:4000/route1
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "test": "test"
+  }
+}
+
+body:form-urlencoded {
+  test: test
+}
