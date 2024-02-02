@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify';
-import rateLimit, { RateLimitPluginOptions } from '@fastify/rate-limit';
+import rateLimit from '@fastify/rate-limit';
 import fastifyPlugin, { PluginMetadata } from 'fastify-plugin';
 
 const metadata: PluginMetadata = {
@@ -7,9 +7,7 @@ const metadata: PluginMetadata = {
 };
 
 async function plugin(fastify: FastifyInstance) {
-  const opts: RateLimitPluginOptions = { max: 100, timeWindow: '1 minute' };
-
-  await fastify.register(rateLimit, opts);
+  await fastify.register(rateLimit, { max: 100, timeWindow: '1 minute' });
 }
 
 export default fastifyPlugin(plugin, metadata);

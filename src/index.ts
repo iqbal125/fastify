@@ -5,17 +5,19 @@ import fastifyEnv from '@fastify/env';
 import { options } from './types/envConfig';
 import path from 'path';
 
-export const server = fastify();
+export const server = fastify({ logger: true });
 
-server.register(fastifyEnv, options);
+const register = async () => {
+  server.register(fastifyEnv, options);
 
-server.register(AutoLoad, {
-  dir: path.join(__dirname, 'plugins')
-});
+  server.register(AutoLoad, {
+    dir: path.join(__dirname, 'plugins')
+  });
 
-server.register(AutoLoad, {
-  dir: path.join(__dirname, 'routes')
-});
+  server.register(AutoLoad, {
+    dir: path.join(__dirname, 'routes')
+  });
+};
 
 const start = async () => {
   const port = Number(process.env.PORT) || 4000;
@@ -29,4 +31,5 @@ const start = async () => {
   });
 };
 
+register();
 start();

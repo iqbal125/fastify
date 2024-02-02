@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify';
-import cors, { FastifyCorsOptions } from '@fastify/cors';
+import cors from '@fastify/cors';
 import fastifyPlugin, { PluginMetadata } from 'fastify-plugin';
 
 const metadata: PluginMetadata = {
@@ -9,7 +9,7 @@ const metadata: PluginMetadata = {
 async function plugin(fastify: FastifyInstance) {
   const origin = [process.env.ORIGIN || 'http://127.0.0.1:4000'];
 
-  const opts: FastifyCorsOptions = {
+  await fastify.register(cors, {
     origin,
     allowedHeaders: [
       'Access-Control-Allow-Origin',
@@ -22,9 +22,7 @@ async function plugin(fastify: FastifyInstance) {
     exposedHeaders: 'Authorization',
     credentials: true,
     methods: ['GET', 'PUT', 'OPTIONS', 'POST', 'DELETE']
-  };
-
-  await fastify.register(cors, opts);
+  });
 }
 
 export default fastifyPlugin(plugin, metadata);

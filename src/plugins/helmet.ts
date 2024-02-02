@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify';
-import helmet, { FastifyHelmetOptions } from '@fastify/helmet';
+import helmet from '@fastify/helmet';
 import fastifyPlugin, { PluginMetadata } from 'fastify-plugin';
 
 const metadata: PluginMetadata = {
@@ -7,9 +7,7 @@ const metadata: PluginMetadata = {
 };
 
 async function plugin(fastify: FastifyInstance) {
-  const opts: FastifyHelmetOptions = { global: true };
-
-  await fastify.register(helmet, opts);
+  await fastify.register(helmet, { global: true });
 }
 
 export default fastifyPlugin(plugin, metadata);
