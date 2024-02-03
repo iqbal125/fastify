@@ -1,34 +1,24 @@
 import { FastifyInstance } from 'fastify';
 
+import { Type, Static } from '@sinclair/typebox';
+
+const Body = Type.Object({
+  testRequired: Type.String(),
+  test: Type.Optional(Type.String())
+});
+
+type bodyType = Static<typeof Body>;
+
 export default async function routes(fastify: FastifyInstance) {
-  fastify.post(
+  fastify.post<{ Body: bodyType }>(
     '/',
     {
       schema: {
-        body: {
-          type: 'object',
-          required: ['testRequired'],
-          properties: {
-            test: { type: 'string' },
-            testRequired: {
-              type: 'string'
-            }
-          }
-        },
-        response: {
-          '2xx': {
-            description: 'Successful response',
-            type: 'object',
-            properties: {
-              status: { type: 'string' }
-            }
-          }
-        }
+        body: Body
       }
     },
     async (req) => {
       console.log(req.body);
-      return { status: 'success' };
     }
   );
 }

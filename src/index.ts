@@ -3,9 +3,10 @@ import fastify from 'fastify';
 import AutoLoad from '@fastify/autoload';
 import fastifyEnv from '@fastify/env';
 import { options } from './types/envConfig';
+import { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 import path from 'path';
 
-export const server = fastify({ logger: true });
+export const server = fastify({ logger: true }).withTypeProvider<TypeBoxTypeProvider>();
 
 const register = async () => {
   server.register(fastifyEnv, options);

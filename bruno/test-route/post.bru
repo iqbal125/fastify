@@ -1,7 +1,7 @@
 meta {
-  name: dbroute-post
+  name: post
   type: http
-  seq: 4
+  seq: 1
 }
 
 post {
@@ -12,7 +12,11 @@ post {
 
 body:json {
   {
-    "title": "test",
-    "description": "test"
+    "testRequired": "test",
+    "test": "test"
   }
+}
+
+body:form-urlencoded {
+  test: test
 }
